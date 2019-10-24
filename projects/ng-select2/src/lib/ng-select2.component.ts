@@ -245,4 +245,8 @@ export class NgSelect2Component implements AfterViewInit, OnChanges, OnDestroy, 
 
   registerOnTouched() {
   }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
 }
