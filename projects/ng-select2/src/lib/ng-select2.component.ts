@@ -199,7 +199,7 @@ export class NgSelect2Component implements AfterViewInit, OnChanges, OnDestroy, 
         options.matcher = oldMatcher(options.matcher);
         this.element.select2(options);
 
-        if (typeof this.value !== 'undefined') {
+        if (this.value !== undefined && this.value !== null) {
           this.setElementValue(this.value);
         }
       });
@@ -208,6 +208,12 @@ export class NgSelect2Component implements AfterViewInit, OnChanges, OnDestroy, 
     }
 
     this.renderer.setProperty(this.selector.nativeElement, 'disabled', this.disabled);
+
+    const value = this.element.val();
+    if (value !== this.value) {
+      this.valueChanged.emit(value);
+      this.propagateChange(value);
+    }
   }
 
   private setElementValue(newValue: string | string[]) {
